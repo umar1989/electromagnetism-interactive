@@ -1,0 +1,488 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Magnetic Effects of Electric Current</title>
+<meta name="description" content="Interactive Class X Physical Science, Chapter 10: Electromagnetism. Simulations, step-by-step derivations, quizzes and numericals.">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<script defer src="assets/app.js"></script>
+</head>
+<body>
+<nav class="top" aria-label="Chapter sections">
+  <div class="wrap">
+    <span class="brand">⚡ Electromagnetism</span>
+    <a href="#basics">Basics</a>
+    <a href="#partA">A: Fields</a>
+    <a href="#partB">B: Forces</a>
+    <a href="#partC">C: Induction</a>
+    <a href="#revise">Revise</a>
+    <a href="#practice">Practice</a>
+    <a href="#downloads">Downloads</a>
+    <button id="theme" aria-label="Toggle dark mode">🌓</button>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap row">
+    <div style="flex:1 1 380px">
+      <div class="tag">CLASS X · PHYSICAL SCIENCE · CHAPTER 10</div>
+      <h1>Magnetic Effects of Electric Current</h1>
+      <p>Learn by doing: drag magnets, spin coils, steer charged particles, reveal derivations one step at a time, then test yourself.</p>
+      <a class="btn" href="#basics">Start learning</a>
+      <a class="btn ghost" href="#practice">Jump to practice</a>
+      <div style="max-width:420px;margin-top:14px">
+        <div class="hint" style="color:#dbe6ff">Your progress (saved in this browser)</div>
+        <div class="done-bar"><i id="progress"></i></div>
+        <div class="hint" id="progressText" style="color:#dbe6ff"></div>
+      </div>
+    </div>
+    <img src="assets/figures/solenoid_field.png" alt="Iron filings showing the magnetic field of a solenoid">
+  </div>
+</header>
+
+<main class="wrap">
+
+<section class="chap" id="roadmap">
+  <h2>The big picture</h2>
+  <div class="grid g3">
+    <div class="card" style="border-top:5px solid var(--blue)"><h3>Part A · Currents make fields</h3><p>Oersted's experiment, field lines, flux Φ and flux density B, fields of a wire, coil and solenoid.</p><a href="#partA">Go to Part A →</a></div>
+    <div class="card" style="border-top:5px solid var(--purple)"><h3 style="color:var(--purple)">Part B · Fields push currents</h3><p>F = qvB sinθ, circular motion, F = ILB sinθ, the electric motor.</p><a href="#partB">Go to Part B →</a></div>
+    <div class="card" style="border-top:5px solid var(--green)"><h3 style="color:var(--green)">Part C · Changing fields make currents</h3><p>Induction, Faraday and Lenz, ε = Blv, levitation, generators.</p><a href="#partC">Go to Part C →</a></div>
+  </div>
+  <div class="box simple"><b class="t">💡 Remember this one line</b>Electricity and magnetism are two faces of the same thing. Current makes magnetism; magnetism pushes current; changing magnetism makes current.</div>
+</section>
+
+<!-- ============ BASICS ============ -->
+<section class="chap" id="basics">
+  <div class="part-title"><span class="pill">Start here</span><h2>Basics first</h2></div>
+  <p class="lead">Open each card. If you already know it, tick it off and move on.</p>
+
+  <details><summary>🧲 What is a magnet?</summary><div class="inner">
+    <p>Every magnet has two poles, North (N) and South (S). <b>Unlike poles attract, like poles repel.</b> Cut a magnet and each piece still has both poles. A compass needle is a tiny magnet; it points north because the Earth acts like a giant magnet.</p>
+    <p>Magnets attract iron, nickel and cobalt.</p>
+  </div></details>
+
+  <details><summary>🌫️ What is a field?</summary><div class="inner">
+    <p>Cooking smell: strong near the stove, weak far away (strength changes with place), and it drifts from the stove to you (direction). A <b>field</b> is the space around an object where it can push or pull other things without touching, with a <i>strength</i> and <i>direction</i> at every point.</p>
+    <figure><img src="assets/figures/bar_field.png" alt="Field lines of a bar magnet" width="420"><figcaption>Field lines of a bar magnet. Arrow = direction; crowded lines = stronger field.</figcaption></figure>
+  </div></details>
+
+  <details><summary>🔌 What is electric current?</summary><div class="inner">
+    <p>Current is the flow of charge: $I=\dfrac{Q}{t}$, unit ampere (A). 1 A = 1 coulomb per second. We <b>draw</b> current from + to − (old convention); electrons really move the other way. Follow the drawn direction in this chapter.</p>
+  </div></details>
+
+  <details><summary>⊙ ⊗ Arrows into and out of the page</summary><div class="inner">
+    <p><b>⊙ (dot)</b>: pointing out of the page, towards you (you see the arrow tip). <b>⊗ (cross)</b>: into the page, away from you (you see the tail feathers).</p>
+    <div class="box simple"><b class="t">Memory trick</b>Dot = Dooming at you. Cross = Carrying away.</div>
+    <div class="sim"><h4>Dot or cross?</h4><div id="dotcross"></div></div>
+  </div></details>
+
+  <details open><summary>🖐️ Your right hand is the tool of this chapter</summary><div class="inner">
+    <div class="imgrow">
+      <figure><img src="assets/figures/thumb_rule.png" alt="Right hand thumb rule"><figcaption><b>Rule 1: thumb rule</b><br>Straight wire. Thumb = current, curled fingers = field.</figcaption></figure>
+      <figure><img src="assets/figures/coil_hand.png" alt="Right hand rule for a coil"><figcaption><b>Rule 2: coil rule</b><br>Curled fingers = current, thumb = N pole.</figcaption></figure>
+      <figure><img src="assets/figures/rh_rule_b.png" alt="Right hand force rule"><figcaption><b>Rule 3: force rule</b><br>Forefinger = I (or v), middle finger = B, thumb = F.</figcaption></figure>
+    </div>
+    <div class="box simple"><b class="t">Always ask: what do I know, and what do I want?</b>Know the current, want the field? Rule 1 or 2. Know current and field, want the push? Rule 3. Right hand only.</div>
+  </div></details>
+
+  <details><summary>📏 Symbols and units</summary><div class="inner tablewrap">
+    <table><tr><th>Quantity</th><th>Symbol</th><th>SI unit</th><th>In plain words</th></tr>
+    <tr><td>Current</td><td>$I$</td><td>ampere (A)</td><td>how fast charge flows</td></tr>
+    <tr><td>Charge</td><td>$q$, $Q$</td><td>coulomb (C)</td><td>amount of charge</td></tr>
+    <tr><td>Velocity</td><td>$v$</td><td>m/s</td><td>speed with direction</td></tr>
+    <tr><td>Flux density</td><td>$B$</td><td>tesla (T)</td><td>strength of the field</td></tr>
+    <tr><td>Flux</td><td>$\Phi$</td><td>weber (Wb)</td><td>total field through an area</td></tr>
+    <tr><td>Force</td><td>$F$</td><td>newton (N)</td><td>a push or pull</td></tr>
+    <tr><td>Induced emf</td><td>$\varepsilon$</td><td>volt (V)</td><td>electrical push that drives current</td></tr></table>
+    <div class="box tip"><b class="t">Unit tip</b>1 T = 1 Wb/m². Convert first: cm → m, and cm² → m² (divide by 10⁴, not 100).</div>
+  </div></details>
+
+  <details><summary>🧮 Maths toolkit: powers of ten, units, rearranging, sin/cos, Δ, proportion</summary><div class="inner">
+    <h3>Powers of ten</h3>
+    <p>Proton charge $0.00000000000000000016$ C $=1.6\times10^{-19}$ C. Rules: $10^a\times10^b=10^{a+b}$, $\dfrac{10^a}{10^b}=10^{a-b}$.</p>
+    <p><i>Example:</i> $(2\times10^6)(1.6\times10^{-19})(0.5)$: numbers $2\times1.6\times0.5=1.6$; powers $10^{6-19}=10^{-13}$; answer $1.6\times10^{-13}$.</p>
+    <h3>Changing units</h3>
+    <ul><li>cm → m: divide by 100 (20 cm = 0.2 m)</li><li>mm → m: divide by 1000</li><li>cm² → m²: divide by $10^4$ (4 cm² = $4\times10^{-4}$ m²)</li><li>minutes → s: multiply by 60</li></ul>
+    <h3>Rearranging: the balance method</h3>
+    <p>Do the same to both sides. From $F=ILB$: $B=\dfrac{F}{IL}$, $I=\dfrac{F}{LB}$, $L=\dfrac{F}{IB}$.</p>
+    <h3>Sine and cosine</h3>
+    <div class="tablewrap"><table><tr><th>θ</th><th>0°</th><th>30°</th><th>45°</th><th>60°</th><th>90°</th></tr>
+    <tr><td>sin θ</td><td>0</td><td>½</td><td>1/√2</td><td>√3/2</td><td>1</td></tr>
+    <tr><td>cos θ</td><td>1</td><td>√3/2</td><td>1/√2</td><td>½</td><td>0</td></tr></table></div>
+    <p>In $F=qvB\sin\theta$, θ is between $v$ and $B$. In $\Phi=BA\cos\theta$, θ is between $B$ and the <b>normal</b> to the plane.</p>
+    <h3>Δ means change; rate of change = change ÷ time</h3>
+    <p>$\Delta\Phi=\Phi_{\text{final}}-\Phi_{\text{initial}}$, and $\varepsilon=\Delta\Phi/\Delta t$. Flux falls 0.5 → 0.1 Wb in 0.2 s: $|\varepsilon|=0.4/0.2=2$ V.</p>
+    <h3>If this doubles, what happens?</h3>
+    <div class="tablewrap"><table><tr><th>Formula</th><th>If this doubles</th><th>That</th></tr>
+    <tr><td>$F=ILB$</td><td>B</td><td>F doubles</td></tr>
+    <tr><td>$F=ILB$</td><td>I and L</td><td>F × 4</td></tr>
+    <tr><td>$r=\frac{mv}{Bq}$</td><td>B</td><td>r halves</td></tr>
+    <tr><td>$\varepsilon=Blv$</td><td>v</td><td>ε doubles</td></tr></table></div>
+    <div class="box tip"><b class="t">Steps for every numerical</b>1. Write the formula. 2. Convert units. 3. Rearrange. 4. Substitute. 5. Calculate and write the unit.</div>
+  </div></details>
+
+  <div class="mark"><label><input type="checkbox" data-track="basics"> I have finished the basics</label></div>
+</section>
+
+<!-- ============ PART A ============ -->
+<section class="chap" id="partA">
+  <div class="part-title"><span class="pill" style="background:var(--blue)">Part A</span><h2>Currents make magnetic fields</h2></div>
+  <div class="box goal"><b class="t">By the end you can…</b>Describe Oersted's observation · read field lines · explain flux Φ and flux density B and use Φ = BA cosθ · find field direction around a wire, coil and solenoid.</div>
+
+  <h3>10.1 Oersted's experiment <span class="badge">2M</span><span class="badge">4M</span></h3>
+  <div class="card grid g2">
+    <figure><img src="assets/figures/oersted_setup.png" alt="Current-carrying wire above a compass"><figcaption>fig-1: wire above a compass, in series with battery and key</figcaption></figure>
+    <div>
+      <ol>
+        <li>Wire passes over a compass, in series with battery and key.</li>
+        <li>Bring a bar magnet near: the needle deflects.</li>
+        <li>Remove the magnet, switch <b>on</b>: the needle deflects again!</li>
+        <li>Switch off: the needle returns to N–S.</li>
+      </ol>
+      <div class="box answer"><b class="t">Conclusion</b>A current-carrying wire produces a magnetic field around it.</div>
+    </div>
+  </div>
+  <details><summary>Do you know? Hans Christian Oersted (1777–1851)</summary><div class="inner"><div class="imgrow" style="justify-content:flex-start"><figure style="max-width:150px"><img src="assets/figures/oersted.png" alt="H. C. Oersted"></figure><ul style="flex:3 1 280px"><li>In April 1820 he placed a compass under a wire and switched on a current: the needle deflected.</li><li>This began <b>electromagnetism</b> and led to motors, dynamos, radio and TV.</li><li>The old unit of field strength, the <i>oersted</i>, is named after him.</li></ul></div></div></details>
+
+  <h3>10.2 Magnetic field and field lines <span class="badge">1M</span><span class="badge">2M</span></h3>
+  <div class="card">
+    <p>A <b>magnetic field</b> is the region around a magnet where its force can be felt. It has <i>strength</i> and <i>direction</i>.</p>
+    <ul>
+      <li>Field lines are imaginary curves; the <b>tangent</b> at a point gives the field direction.</li>
+      <li><b>Crowded</b> lines = strong field; <b>spread</b> lines = weak field.</li>
+      <li><b>Uniform field</b>: strength <i>and</i> direction constant (parallel, equally spaced lines). Otherwise <b>non-uniform</b>.</li>
+      <li>Field lines never cross, and they form <b>closed loops</b>.</li>
+    </ul>
+    <div class="sim"><h4>Compass explorer: bar magnet</h4>
+      <canvas id="cvCompass" width="900" height="420" aria-label="Bar magnet with draggable compass"></canvas>
+      <p class="hint">Drag or tap anywhere: the compass needle shows the field direction there. Press “Trace line” to follow the field line from your point, as in Activity 3.</p>
+      <div class="dctl"><button id="traceBtn" class="primary">Trace line from here</button><button id="clearTrace">Clear</button><button id="flipMagnet">Flip magnet</button></div>
+      <div class="readout"><div>Field strength here: <b id="cmpStr">–</b></div></div>
+    </div>
+  </div>
+
+  <h3>10.2.2 Flux and flux density <span class="badge">1M</span><span class="badge">2M</span></h3>
+  <div class="card">
+    <div class="box def"><b class="t">Magnetic flux Φ</b>Number of field lines through an area A held <b>perpendicular</b> to the field. Unit weber (Wb).</div>
+    <div class="box def"><b class="t">Flux density B</b>Flux through unit area held perpendicular to the field: $B=\Phi/A$, unit Wb/m² = tesla (T).</div>
+    <div class="box simple"><b class="t">Rain through a window</b>Rain = field lines. Window face-on: most rain passes. Tilt it: less. Edge-on: none. Flux = how much rain passes; B = how heavy the rain is.</div>
+    <div class="sim"><h4>Flux through a tilted plane: Φ = BA cosθ</h4>
+      <canvas id="cvFlux" width="900" height="360" aria-label="Field lines through a tilted plane"></canvas>
+      <div class="ctrl">
+        <label>Angle θ between B and the normal: <span class="v" id="fth">0°</span><input id="fthS" type="range" min="0" max="90" value="0"></label>
+        <label>Flux density B (T): <span class="v" id="fB">0.50</span><input id="fBS" type="range" min="0.1" max="1" step="0.05" value="0.5"></label>
+        <label>Area A (m²): <span class="v" id="fA">0.020</span><input id="fAS" type="range" min="0.005" max="0.05" step="0.005" value="0.02"></label>
+      </div>
+      <div class="readout"><div>cos θ = <b id="fcos">1.000</b></div><div>Φ = BA cosθ = <b id="fphi">0.0100 Wb</b></div></div>
+      <p class="hint">Edge view. Orange = the plane, dashed = its normal, blue = field lines. Try θ = 0° (max) and θ = 90° (zero).</p>
+    </div>
+    <div id="deriv-flux"></div>
+  </div>
+
+  <h3>10.3 Fields of a wire, coil and solenoid <span class="badge">2M</span><span class="badge">4M</span></h3>
+  <div class="card">
+    <div class="grid g2">
+      <figure><img src="assets/figures/wire_setup.png" alt="Compass needles around a vertical wire" style="max-height:300px"><figcaption>fig-4(a): Activity 4, compasses around a vertical wire</figcaption></figure>
+      <div>
+        <h3 style="margin-top:0">Straight wire</h3>
+        <p>Needles set along tangents to a circle; iron filings form <b>concentric circles</b>. Field lines are closed loops in a plane perpendicular to the wire, closer together (stronger) near the wire.</p>
+        <div class="box def"><b class="t">Right hand thumb rule</b>Thumb along the current; curled fingers give the field direction.</div>
+      </div>
+    </div>
+    <div class="sim"><h4>Right-hand thumb rule: field around a wire</h4>
+      <canvas id="cvWire" width="900" height="360" aria-label="Field around a straight wire"></canvas>
+      <div class="dctl"><button id="wireDir" class="primary">Reverse current</button></div>
+      <p class="hint" id="wireTxt"></p>
+      <div class="ctrl"><label>Current I: <span class="v" id="wI">5 A</span><input id="wIS" type="range" min="1" max="10" value="5"></label></div>
+      <p class="hint">More current → compass needles and circles get denser: the field is stronger.</p>
+    </div>
+    <h3>Circular coil</h3>
+    <div class="grid g2">
+      <figure><img src="assets/figures/coil_setup.png" alt="Field of a circular coil"><figcaption>fig-5(a)</figcaption></figure>
+      <div>
+        <ul><li>At the centre the field is along the axis, perpendicular to the plane of the coil.</li><li>The face where the field comes <i>out</i> is the <b>N pole</b>; the other is S.</li></ul>
+        <div class="box def"><b class="t">Right hand rule for a coil</b>Curl fingers along the current; thumb gives the field (out of the N face).</div>
+        <div class="box tip"><b class="t">Memory aid</b>Draw N and S with arrowheads at their ends: N runs anticlockwise, S runs clockwise. Anticlockwise current = N face.</div>
+      </div>
+    </div>
+    <div class="sim"><h4>Which face is North?</h4>
+      <canvas id="cvCoil" width="900" height="280" aria-label="Coil face viewed head-on"></canvas>
+      <div class="dctl"><button id="coilDir" class="primary">Reverse current</button></div>
+      <p class="hint" id="coilTxt"></p>
+    </div>
+    <h3>Solenoid</h3>
+    <div class="grid g2">
+      <figure><img src="assets/figures/solenoid_field.png" alt="Iron filings around a solenoid"><figcaption>fig-6(b): iron filings show a bar-magnet pattern</figcaption></figure>
+      <div>
+        <div class="box def"><b class="t">Solenoid</b>A long wire wound in a close-packed helix.</div>
+        <ul><li>Behaves like a <b>bar magnet</b>; find N and S with the coil rule.</li><li>Outside, lines go N → S; inside, S → N, strong and nearly uniform.</li><li>Lines are <b>closed loops</b>.</li></ul>
+        <div class="box answer"><b class="t">Big idea</b>Moving charges (currents) produce magnetic fields.</div>
+      </div>
+    </div>
+  </div>
+  <div class="mark"><label><input type="checkbox" data-track="partA"> I have finished Part A</label></div>
+</section>
+
+<!-- ============ PART B ============ -->
+<section class="chap" id="partB">
+  <div class="part-title"><span class="pill" style="background:var(--purple)">Part B</span><h2>Fields push on currents</h2></div>
+  <div class="box goal"><b class="t">By the end you can…</b>Find the direction and size of the force on a moving charge and on a wire · show why a charge circles: r = mv/Bq · derive F = ILB · explain how an electric motor keeps turning.</div>
+
+  <h3>10.4 Force on a moving charge <span class="badge">1M</span><span class="badge">2M</span></h3>
+  <div class="card">
+    <p>Bring a magnet near an old CRT TV and the picture distorts: the field pushes on the moving electrons.</p>
+    <div class="box formula"><b class="t">Magnetic force on a charge</b>$F=qvB\sin\theta$ &nbsp; ($F=qvB$ when $v\perp B$)</div>
+    <div class="tablewrap"><table><tr><th>Situation</th><th>sin θ</th><th>Force</th></tr>
+      <tr><td>θ = 90° (v ⟂ B)</td><td>1</td><td>maximum, qvB</td></tr>
+      <tr><td>θ = 0° or 180° (along/against B)</td><td>0</td><td>zero</td></tr>
+      <tr><td>v = 0 (charge at rest)</td><td>–</td><td>zero</td></tr></table></div>
+    <div class="imgrow"><figure><img src="assets/figures/rh_rule_a.png" alt="Right hand rule a"><figcaption>fig-8(a): fingers along v, curl to B, thumb gives F</figcaption></figure></div>
+    <div class="box tip"><b class="t">Electron?</b>F is perpendicular to both v and B. The rules are for a <b>positive</b> charge; for an electron find the direction for +q and <b>reverse</b> it.</div>
+
+    <div class="sim"><h4>Charged particle in a magnetic field</h4>
+      <canvas id="cvCharge" width="900" height="460" aria-label="Charged particle moving in a circle"></canvas>
+      <div class="ctrl">
+        <label>Mass m (units): <span class="v" id="cm">1.0</span><input id="cmS" type="range" min="0.5" max="3" step="0.5" value="1"></label>
+        <label>Speed v (units): <span class="v" id="cv">3</span><input id="cvS" type="range" min="1" max="6" step="0.5" value="3"></label>
+        <label>Field B (units): <span class="v" id="cb">2</span><input id="cbS" type="range" min="1" max="6" step="0.5" value="2"></label>
+        <label>Charge<select id="cq"><option value="1">Positive (+q)</option><option value="-1">Negative (−q, electron-like)</option></select></label>
+        <label>Field direction<select id="cdir"><option value="-1">Into page ⊗</option><option value="1">Out of page ⊙</option></select></label>
+      </div>
+      <div class="readout"><div>r = mv/Bq = <b id="cr">–</b></div><div>T = 2πm/Bq = <b id="cT">–</b></div><div>Turning: <b id="cturn">–</b></div></div>
+      <div class="dctl"><button id="cReset">Restart</button><button id="cTrail">Clear trail</button></div>
+      <p class="hint">Double B and watch r halve. Change v: the circle grows but T does not change. Flip the charge sign: the circle reverses.</p>
+    </div>
+    <div id="deriv-circ"></div>
+  </div>
+
+  <h3>Force on a current-carrying wire <span class="badge">4M</span></h3>
+  <div class="card">
+    <div id="deriv-wire"></div>
+    <div class="grid g2" style="margin-top:12px">
+      <figure><img src="assets/figures/wire_force_setup.png" alt="Wire in a horseshoe magnet"><figcaption>fig-10: Activity 8, wire in a horseshoe magnet</figcaption></figure>
+      <div>
+        <ol><li>Copper wire between split sticks, 9 V battery, switch.</li><li>Switch on and bring a horseshoe magnet around the wire: it is <b>deflected</b>.</li><li>Reverse the magnet or the current: deflection <b>reverses</b>.</li></ol>
+        <div class="box answer"><b class="t">Conclusion</b>A current-carrying wire in a magnetic field feels a force whose direction depends on the directions of current and field.</div>
+      </div>
+    </div>
+    <div class="sim"><h4>Force direction: the right hand rule as a calculator</h4>
+      <div class="ctrl">
+        <label>Current I points<select id="wdI"></select></label>
+        <label>Field B points<select id="wdB"></select></label>
+      </div>
+      <canvas id="cvForce" width="900" height="300" aria-label="Current, field and force vectors"></canvas>
+      <div class="readout"><div>Force F points: <b id="wdF">–</b></div></div>
+      <p class="hint">Axes: x → right, y ↑ up, z ⊙ out of the page. F = I × B (forefinger × middle finger → thumb). If I ∥ B the force is zero.</p>
+    </div>
+    <div class="sim"><h4>Size of the force: F = ILB sinθ</h4>
+      <div class="ctrl">
+        <label>Current I (A): <span class="v" id="fI">5</span><input id="fIS" type="range" min="1" max="20" value="5"></label>
+        <label>Length L (m): <span class="v" id="fL">0.5</span><input id="fLS" type="range" min="0.1" max="2" step="0.1" value="0.5"></label>
+        <label>Field B (T): <span class="v" id="fBB">0.2</span><input id="fBBS" type="range" min="0.1" max="2" step="0.1" value="0.2"></label>
+        <label>Angle θ between wire and B: <span class="v" id="fT">90°</span><input id="fTS" type="range" min="0" max="180" step="5" value="90"></label>
+      </div>
+      <div class="readout"><div>F = <b id="fF">–</b></div><div id="fNote"></div></div>
+    </div>
+    <h3>Why does the wire move? Combining the fields</h3>
+    <div class="grid g2"><figure><img src="assets/figures/combined_field.png" alt="Combined field" style="max-height:260px"><figcaption>fig-11(c)</figcaption></figure>
+    <ul><li>On one side the wire's field points <b>with</b> the magnet's field: strong.</li><li>On the other it points <b>against</b>: weak.</li><li>The wire is pushed from the strong region to the <b>weak</b> region.</li></ul></div>
+  </div>
+
+  <h3>10.4.1 The electric motor <span class="badge">4M</span></h3>
+  <div class="card">
+    <div class="box simple"><b class="t">Three ideas, in order</b>
+      <ol><li>A wire carrying current in a field gets pushed sideways.</li><li>A coil has two long sides with opposite currents: one is pushed up, the other down, so the coil <b>spins</b>.</li><li>After half a turn the push would reverse the spin. The <b>split ring (commutator)</b> reverses the current at that moment, so the coil keeps turning the same way.</li></ol></div>
+    <div class="grid g2">
+      <figure><img src="assets/figures/motor.png" alt="Simple electric motor" style="max-height:380px"><figcaption>fig-12(c): simple electric motor</figcaption></figure>
+      <div>
+        <ul><li>AB and CD are ⟂ B, so each gets force ILB; they are equal and opposite, so <b>net force = 0</b>, but they act on different lines: a <b>couple</b> that rotates the coil.</li><li>Without reversal the coil overshoots and rocks to and fro.</li><li>Split rings C₁, C₂ and brushes B₁, B₂ reverse the current every half turn.</li></ul>
+        <div class="box answer"><b class="t">Energy</b>Motor: electrical → mechanical.</div>
+        <div class="box act"><b class="t">Fleming's left hand rule</b>Forefinger = field, middle finger = current, thumb = force (motion).</div>
+      </div>
+    </div>
+    <div class="sim"><h4>Motor: why the commutator matters</h4>
+      <canvas id="cvMotor" width="900" height="340" aria-label="Motor coil with torque graph"></canvas>
+      <div class="dctl"><label class="mark"><input type="checkbox" id="mComm" checked> Split-ring commutator on</label><button id="mKick">Give it a push</button></div>
+      <p class="hint" id="mTxt"></p>
+    </div>
+  </div>
+  <div class="mark"><label><input type="checkbox" data-track="partB"> I have finished Part B</label></div>
+</section>
+
+<!-- ============ PART C ============ -->
+<section class="chap" id="partC">
+  <div class="part-title"><span class="pill" style="background:var(--green)">Part C</span><h2>Changing fields make currents</h2></div>
+  <div class="box goal"><b class="t">By the end you can…</b>Explain electromagnetic induction · state and use Faraday's and Lenz's laws · derive ε = Blv · explain levitation and AC/DC generators.</div>
+
+  <h3>10.5 Electromagnetic induction <span class="badge">2M</span><span class="badge">4M</span></h3>
+  <div class="card">
+    <div class="grid g2">
+      <figure><img src="assets/figures/induction_setup.png" alt="Coil, galvanometer and magnet"><figcaption>fig-13: Activity 9</figcaption></figure>
+      <div class="tablewrap"><table><tr><th>What we do</th><th>Galvanometer</th></tr>
+        <tr><td>Magnet at rest near coil</td><td>no deflection</td></tr>
+        <tr><td>N pole moved towards coil</td><td>deflects one way</td></tr>
+        <tr><td>N pole moved away</td><td>deflects the other way</td></tr>
+        <tr><td>S pole instead</td><td>reversed</td></tr>
+        <tr><td>Coil moved, magnet fixed</td><td>also deflects</td></tr></table></div>
+    </div>
+    <div class="box simple"><b class="t">Only change counts</b>A magnet sitting still in a coil makes no current, however strong. Faster motion, more turns, a stronger magnet: larger emf. Reverse the motion: current flows the opposite way.</div>
+
+    <div class="sim"><h4>Faraday + Lenz: drag the magnet</h4>
+      <canvas id="cvInd" width="900" height="400" aria-label="Magnet moving through a coil with galvanometer"></canvas>
+      <div class="ctrl">
+        <label>Turns N: <span class="v" id="iN">20</span><input id="iNS" type="range" min="5" max="100" step="5" value="20"></label>
+        <label>Magnet strength: <span class="v" id="iB">1.0</span><input id="iBS" type="range" min="0.5" max="2" step="0.1" value="1"></label>
+      </div>
+      <div class="dctl"><button id="iFlip">Swap poles</button><button id="iCl">Reset magnet</button></div>
+      <div class="readout"><div>Flux change: <b id="iDphi">–</b></div><div>Near face of coil: <b id="iFace">–</b></div><div>Peak |ε|: <b id="iPeak">0</b></div></div>
+      <p class="hint">Drag the magnet left and right. Push it in slowly, then quickly. Hold it still. Pull it out. The graph below the coil is the induced emf over time.</p>
+    </div>
+  </div>
+
+  <h3>Faraday's and Lenz's laws <span class="badge">1M</span><span class="badge">2M</span><span class="badge">4M</span></h3>
+  <div class="card grid g2">
+    <div>
+      <div class="box def"><b class="t">Faraday's law</b>Induced emf in a closed loop equals the <b>rate of change of magnetic flux</b> through it.
+        <div style="text-align:center">$\varepsilon=\dfrac{\Delta\Phi}{\Delta t}$ &nbsp; $N$ turns: $\varepsilon=N\dfrac{\Delta\Phi_0}{\Delta t}$</div></div>
+      <div class="box tip"><b class="t">Exam tip</b>No change of flux → no emf, however strong the field.</div>
+    </div>
+    <div>
+      <div class="box def"><b class="t">Lenz's law</b>The induced current flows in a direction that <b>opposes the change in flux</b> that produces it.</div>
+      <div class="box simple"><b class="t">Heavy door</b>Push a heavy door and it pushes back. If the coil <i>helped</i> the magnet, it would speed up by itself and give free energy, breaking conservation of energy.</div>
+    </div>
+    <figure style="grid-column:1/-1"><img src="assets/figures/lenz.png" alt="Lenz's law" style="max-height:260px"><figcaption>fig-14: N faces N, so the coil repels the approaching magnet</figcaption></figure>
+  </div>
+
+  <h3>Derivation 4: motional emf ε = Blv <span class="badge">4M</span></h3>
+  <div class="card">
+    <figure><img src="assets/figures/crosswire.png" alt="Cross wire on parallel conductors" style="max-height:260px"><figcaption>fig-15: a cross wire slides on two parallel conductors in a uniform field B</figcaption></figure>
+    <div id="deriv-emf"></div>
+    <div class="box tip"><b class="t">Note</b>ε = Blv is not Faraday's law itself; it is for a single moving conductor in a uniform field.</div>
+    <div class="sim"><h4>Sliding rod: ε = Blv</h4>
+      <canvas id="cvRod" width="900" height="300" aria-label="Rod sliding on rails"></canvas>
+      <div class="ctrl">
+        <label>Field B (T): <span class="v" id="rB">0.8</span><input id="rBS" type="range" min="0.2" max="2" step="0.1" value="0.8"></label>
+        <label>Length l (m): <span class="v" id="rL">1.0</span><input id="rLS" type="range" min="0.2" max="2" step="0.1" value="1"></label>
+        <label>Speed v (m/s): <span class="v" id="rV">5</span><input id="rVS" type="range" min="0" max="15" step="0.5" value="5"></label>
+      </div>
+      <div class="readout"><div>ε = Blv = <b id="rE">–</b></div></div>
+    </div>
+  </div>
+
+  <h3>Applications and levitation <span class="badge">2M</span><span class="badge">4M</span></h3>
+  <div class="grid g2">
+    <div class="card"><h3>Metal detector</h3><p>A large coil with weak AC field. Iron on the body changes the flux; the induced current triggers an alarm.</p></div>
+    <div class="card"><h3>Tape recorder</h3><p>Magnetised iron-oxide tape moves past a head coil; the changing field induces a current.</p></div>
+    <div class="card"><h3>Induction stove</h3><p>AC coil under the surface induces current in the metal pan; its resistance turns that into heat.</p></div>
+    <div class="card"><h3>ATM card swipe</h3><p>The magnetic strip moves past a coil; the changing flux induces a pattern read as data.</p></div>
+  </div>
+  <div class="card">
+    <h3>Magnetic levitation</h3>
+    <div class="grid g2">
+      <div class="imgrow"><figure><img src="assets/figures/levitation.png" alt="Levitating ring"><figcaption>fig-16(a)</figcaption></figure><figure><img src="assets/figures/levitation_field.png" alt="Levitation field"><figcaption>fig-16(c)</figcaption></figure></div>
+      <div id="deriv-lev"></div>
+    </div>
+    <div class="box tip"><b class="t">With DC?</b>The ring jumps only at switch on/off (flux changes only then) and falls back.</div>
+  </div>
+
+  <h3>Generators <span class="badge">4M</span></h3>
+  <div class="card">
+    <div class="grid g2">
+      <div class="box" style="border-color:var(--orange);background:var(--tint-orange)"><b class="t">⚙ Motor</b>Electrical energy → motion. Current pushes the coil.</div>
+      <div class="box answer"><b class="t">⚡ Generator</b>Motion → electrical energy. We spin the coil, current appears.</div>
+    </div>
+    <div class="grid g2">
+      <figure><img src="assets/figures/ac_generator.png" alt="AC generator" style="max-height:340px"><figcaption>fig-17(a): AC generator with full slip rings</figcaption></figure>
+      <figure><img src="assets/figures/dc_generator.png" alt="DC generator" style="max-height:340px"><figcaption>fig-17(c): DC generator with half (split) rings</figcaption></figure>
+    </div>
+    <div class="sim"><h4>Spin the coil: AC and DC generator</h4>
+      <canvas id="cvGen" width="900" height="360" aria-label="Rotating coil and emf graph"></canvas>
+      <div class="ctrl">
+        <label>Rotation speed: <span class="v" id="gS">1.0</span> rev/s<input id="gSS" type="range" min="0.2" max="3" step="0.1" value="1"></label>
+        <label>Turns N: <span class="v" id="gN">1</span><input id="gNS" type="range" min="1" max="10" value="1"></label>
+        <label>Rings<select id="gRings"><option value="ac">Full slip rings → AC</option><option value="dc">Split rings → DC</option></select></label>
+      </div>
+      <div class="readout"><div>Coil plane: <b id="gPlane">–</b></div><div>Flux: <b id="gFlux">–</b></div><div>emf: <b id="gEmf">–</b></div></div>
+      <p class="hint">Vertical coil (plane ⟂ field): flux is maximum but changing slowest, so emf = 0. Horizontal coil (plane ∥ field): flux changing fastest, so emf is maximum.</p>
+    </div>
+    <div class="tablewrap"><table><tr><th>Feature</th><th>Electric motor</th><th>Generator</th></tr>
+      <tr><td>Energy change</td><td>electrical → mechanical</td><td>mechanical → electrical</td></tr>
+      <tr><td>Principle</td><td>force on current in a field (F = ILB)</td><td>electromagnetic induction (ε = ΔΦ/Δt)</td></tr>
+      <tr><td>Input / output</td><td>current / rotation</td><td>rotation / induced current</td></tr>
+      <tr><td>Rings</td><td>split rings</td><td>AC: full slip rings; DC: split rings</td></tr>
+      <tr><td>Direction rule</td><td>right hand rule / Fleming's left hand</td><td>Lenz's law</td></tr></table></div>
+  </div>
+  <div class="mark"><label><input type="checkbox" data-track="partC"> I have finished Part C</label></div>
+</section>
+
+<!-- ============ REVISE ============ -->
+<section class="chap" id="revise">
+  <div class="part-title"><span class="pill" style="background:var(--red)">Revise</span><h2>Formula sheet and summary</h2></div>
+  <div class="card">
+    <p class="hint">Tip: tap “Hide” on a row to cover the formula and test yourself.</p>
+    <div class="tablewrap"><table id="formulas"><tr><th>Quantity</th><th>Formula / unit</th></tr></table></div>
+  </div>
+  <div class="card">
+    <h3>All derivations at a glance</h3>
+    <div class="tablewrap"><table><tr><th>#</th><th>Result</th><th>Key idea</th></tr>
+    <tr><td>1</td><td>$\Phi=BA\cos\theta$</td><td>effective area ⟂ field is $A\cos\theta$</td></tr>
+    <tr><td>2</td><td>$r=\frac{mv}{Bq}$, $T=\frac{2\pi m}{Bq}$</td><td>magnetic force = centripetal force</td></tr>
+    <tr><td>3</td><td>$F=ILB\sin\theta$</td><td>add $qvB$ over all charges, $v=L/t$, $I=Q/t$</td></tr>
+    <tr><td>4</td><td>$\varepsilon=\frac{\Delta\Phi}{\Delta t}$, $\varepsilon=Blv$</td><td>work done = electrical energy; $\Delta\Phi=Bls$; $P=\varepsilon I=Fv$</td></tr></table></div>
+  </div>
+  <div class="card">
+    <h3>Concept map</h3>
+    <p style="text-align:center;font-size:1.05rem"><b>Current</b> →(Oersted)→ <b>Magnetic field</b> →(F = qvB, ILB)→ <b>Force / Motor</b><br>↑ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ↓<br><b>Generator</b> ←(Faraday, Lenz)← <b>Changing flux</b></p>
+  </div>
+  <div class="card">
+    <h3>Common mistakes that lose marks</h3>
+    <ul><li>No arrows on field lines.</li><li>Using θ between B and the <i>plane</i> instead of the <i>normal</i> in Φ = BA cosθ.</li><li>Forgetting F = 0 when the wire or charge is parallel to B.</li><li>Not reversing the force for an electron.</li><li>Using cm or cm² in formulas.</li><li>Forgetting N in ε = N ΔΦ₀/Δt.</li><li>Mixing up motor (split rings) and AC generator (slip rings).</li></ul>
+    <h3>Diagrams to practise</h3>
+    <p>fig-2 bar magnet lines · fig-4(b,c) wire with ⊙ ⊗ · fig-6(b) solenoid N, S · fig-8(b) force rule · fig-12 coil and motor · fig-13 and fig-15 induction set-ups · fig-17 AC generator and emf graph.</p>
+  </div>
+  <div class="card">
+    <h3>4-mark answer points</h3>
+    <details><summary>Two activities: a current-carrying wire produces a field</summary><div class="inner">Activity 1 (compass under wire deflects when switched on) · Activity 4 (compasses around a vertical wire set as tangents; iron filings form circles) · diagrams · conclusion.</div></details>
+    <details><summary>Verify the force on a wire in a field</summary><div class="inner">Activity 8: wire between split sticks, 9 V battery, horseshoe magnet · wire deflects · reverse poles/current ⇒ deflection reverses · right hand rule · F = ILB.</div></details>
+    <details><summary>Explain Faraday's law with an activity</summary><div class="inner">Activity 9: coil + galvanometer, magnet in/out, at rest, S pole · ε = ΔΦ/Δt · faster motion, bigger deflection · N turns.</div></details>
+    <details><summary>Experiment for Faraday's law: tips and precautions</summary><div class="inner">Coil of many turns, strong bar magnet, sensitive galvanometer, wires. <b>Tips:</b> more turns, stronger magnet, faster motion. <b>Precautions:</b> tight connections, galvanometer away from the magnet, note zero first, move the magnet along the axis.</div></details>
+    <details><summary>Working of an electric motor</summary><div class="inner">fig-12 · forces on AB, CD equal and opposite ⇒ couple · split rings and brushes reverse current each half turn · continuous rotation · electrical → mechanical.</div></details>
+    <details><summary>Derive ε = Blv / explain the AC generator</summary><div class="inner">Derivation 4 (use the step-by-step above) <b>or</b> fig-17: rotating coil, changing flux, slip rings, emf zero/max, AC graph.</div></details>
+  </div>
+</section>
+
+<!-- ============ PRACTICE ============ -->
+<section class="chap" id="practice">
+  <div class="part-title"><span class="pill" style="background:var(--orange)">Practice</span><h2>Test yourself</h2></div>
+  <div class="tabs" role="tablist">
+    <button role="tab" aria-selected="true" data-tab="mcq">Multiple choice</button>
+    <button role="tab" aria-selected="false" data-tab="flash">1-mark flashcards</button>
+    <button role="tab" aria-selected="false" data-tab="num">Numericals</button>
+    <button role="tab" aria-selected="false" data-tab="concept">Concept questions</button>
+  </div>
+  <div id="tab-mcq"></div>
+  <div id="tab-flash" hidden></div>
+  <div id="tab-num" hidden></div>
+  <div id="tab-concept" hidden></div>
+  <div class="score" id="score">Score: 0 / 0</div>
+</section>
+
+<section class="chap" id="downloads">
+  <h2>Downloads</h2>
+  <div class="grid g2">
+    <a class="card" href="downloads/slides.pdf"><b>📊 Classroom slides (PDF)</b><br><span class="hint">Complete concept deck with all derivations</span></a>
+    <a class="card" href="downloads/handout.pdf"><b>🖨️ Handout (PDF)</b><br><span class="hint">Slides without step-by-step reveals, for printing</span></a>
+    <a class="card" href="downloads/workbook.pdf"><b>📝 Student workbook (PDF)</b><br><span class="hint">Blank answer spaces</span></a>
+    <a class="card" href="downloads/workbook-answers.pdf"><b>✅ Workbook with answers (PDF)</b><br><span class="hint">Model answers filled in</span></a>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap">Class X Physical Science · Chapter 10 · Figures: SCERT Class X Physical Science textbook, pp. 219–248</div></footer>
+</body>
+</html>
